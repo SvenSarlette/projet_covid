@@ -4,15 +4,15 @@ document.addEventListener('DOMContentLoaded', traitementJSON())
 function traitementJSON(){
     let xhr = new XMLHttpRequest()
     xhr.open('get', 'http://localhost:666/personnes', true)
-    let jsonString = ""
     xhr.onload = function() {
         let jsonArray = JSON.parse(xhr.responseText)
         console.log(jsonArray)
         for (let i in jsonArray) {
-            document.getElementById('personneFiltreeTitreId').innerHTML += `<td>${jsonArray[i].id}</td>`
-            document.getElementById('personneFiltreeTitrePrenom').innerHTML += `<td>${jsonArray[i].persPre}</td>`
-            document.getElementById('personneFiltreeTitreNom').innerHTML += `<td>${jsonArray[i].persNom}</td>`
-            document.getElementById('personneFiltreeTitreNaissance').innerHTML += `<td>${jsonArray[i].dateNaiss}</td>`
+            row = document.getElementById('tbodyPersonnesFiltrees').insertRow(i)
+            row.insertCell(0).innerHTML += jsonArray[i].id
+            row.insertCell(1).innerHTML += jsonArray[i].persPre
+            row.insertCell(2).innerHTML += jsonArray[i].persNom
+            row.insertCell(3).innerHTML += jsonArray[i].dateNaiss
         }
     }
     xhr.send()
